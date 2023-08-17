@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang User</title>
+</head>
+<body th:fragment="content">
+    <p class="text-white">Đã đăng nhập với tư cách <span sec:authentication="authorities"></span></p>
+</body>
+</html>

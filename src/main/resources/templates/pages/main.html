@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{index::view(~{::body})}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="mx-auto text-center" sec:authorize="authenticated">
+        <div class="mx-auto d-flex justify-content-end">
+            <a th:href="@{/account/logout}" class="btn btn-outline-light">Logout</a>
+        </div>
+        <th:block sec:authorize="hasRole('USER')" th:replace="~{/pages/user::content}"></th:block>
+        <th:block sec:authorize="hasRole('ADMIN')" th:replace="~{/pages/admin::content(${user}, ${users})}"></th:block>
+        <th:block sec:authorize="hasRole('GUEST')" th:replace="~{/pages/guest::content}"></th:block>
+    </div>
+</body>
+</html>

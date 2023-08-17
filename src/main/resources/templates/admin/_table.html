@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body th:fragment="table(users)">
+  <section class="table-box">
+    <div class="search-box">
+      <form method="get">
+        <input type="text" name="id" placeholder="User ID" th:value="${id}">
+        <button th:formaction="@{/admin/user/search}">Search</button>
+      </form>
+    </div>
+    <table th:if="${users != null && !#lists.isEmpty(users)}">
+      <thead>
+      <tr>
+        <th>No</th>
+        <th>User ID</th>
+        <th>Password</th>
+        <th>Full-name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Edit</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="u, loop: ${users}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${u.id}"></td>
+        <td style="word-break: break-all; overflow-wrap: break-word; width: 25%;"  th:text="${u.password }"></td>
+        <td th:text="${u.fullName }"></td>
+        <td th:text="${u.email }"></td>
+        <td th:text="${u.role != null ? u.role.roleId : ROLE_NULL}"></td>
+        <td>
+          <a th:href="@{|/admin/user/edit/${u.id}|}">Edit</a>
+          <a th:href="@{|/admin/user/delete/${u.id}|}">Remove</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <p th:if="${users == null || #lists.isEmpty(users)}" class="no-user">Không tìm thấy User nào</p>
+  </section>
+</body>
+</html>

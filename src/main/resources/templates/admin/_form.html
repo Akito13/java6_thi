@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body th:fragment="form(user)">
+  <section class="form-box">
+    <div class="form-header mx-auto">
+      <h3>User Management - CRUD</h3>
+      <p>Fill in the form below</p>
+      <p th:if="${message != null}" th:text="${message}" class="message"></p>
+      <p th:if="${error != null}" th:text="${error}" class="error"></p>
+    </div>
+    <form method="post" th:object="${user}" class="mx-auto">
+      <div class="input-container">
+        <input th:field="*{id}" type="text" placeholder="User Id">
+      </div>
+      <div class="input-container">
+        <input th:field="*{password}" type="password" placeholder="Password">
+      </div>
+      <div class="input-container">
+        <input th:field="*{fullName}" type="text" placeholder="Full-name">
+      </div>
+      <div class="input-container">
+        <input th:field="*{email}" type="email" placeholder="Email Address">
+      </div>
+      <div class="input-container">
+        <div class="input-role-container">
+          <label>Role:</label>
+          <div class="input-role">
+            <input th:field="*{role.roleId}" th:value="ROLE_ADMIN" type="radio" id="admin" th:checked="*{role.roleId.equals('ADMIN')}">
+            <label id="admin-label" for="admin">Admin</label>
+          </div>
+          <div class="input-role">
+            <input th:field="*{role.roleId}" th:value="ROLE_USER" type="radio" id="user" th:checked="*{role.roleId.equals('USER')}">
+            <label id="user-label" for="user">User</label>
+          </div>
+        </div>
+      </div>
+      <div class="input-container">
+        <button formaction="/admin/user/create">Create</button>
+        <button formaction="/admin/user/update">Update</button>
+        <button formaction="/admin/user/delete">Delete</button>
+        <button formaction="/admin/user/reset">Reset</button>
+      </div>
+    </form>
+  </section>
+</body>
+</html>
